@@ -36,7 +36,7 @@ public class EquipamentoController {
 	
 	@PostMapping
 	public ResponseEntity<Equipamento> createEquipamento(@RequestBody Equipamento equipamento) {
-		//return equipamentoService.createEquipamento(equipamento);
+		//return equipamentoService.createEquipamento(s);
 		Equipamento savedEquipamento = equipamentoService.createEquipamento(equipamento);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEquipamento);
 	}
