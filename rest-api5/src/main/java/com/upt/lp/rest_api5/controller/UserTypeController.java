@@ -1,12 +1,12 @@
 package com.upt.lp.rest_api5.controller;
-
+ 
 import com.upt.lp.rest_api5.model.UserType;
 import com.upt.lp.rest_api5.service.UserTypeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+ 
 @RestController
 @RequestMapping("/api/user-types")
 public class UserTypeController {

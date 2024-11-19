@@ -15,7 +15,7 @@ public class UserService {
 
     public User registerUser(User user) {
         return userRepository.save(user);
-    }
+    }  
 
     public User authenticateUser(String email, String password) {
         Optional<User> user = userRepository.findByEmail(email);

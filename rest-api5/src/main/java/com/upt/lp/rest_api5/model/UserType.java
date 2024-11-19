@@ -4,3 +4,4 @@ public enum UserType {
     DONOR,
     RECIPIENT
 }
+ 

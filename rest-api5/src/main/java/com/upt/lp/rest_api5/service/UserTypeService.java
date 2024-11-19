@@ -4,7 +4,7 @@ import com.upt.lp.rest_api5.model.UserType;
 import com.upt.lp.rest_api5.repository.UserTypeRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
-
+  
 @Service
 public class UserTypeService {
 

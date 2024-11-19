@@ -28,7 +28,7 @@ public class UserController {
             return ResponseEntity.ok(authenticatedUser);
         }
         return ResponseEntity.status(401).body(null); // Unauthorized
-    }
+    }  
 
     @PutMapping("/update")
     public ResponseEntity<User> updateUser(@RequestBody User user) {
