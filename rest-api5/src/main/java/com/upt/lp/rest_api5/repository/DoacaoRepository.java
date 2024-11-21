@@ -8,5 +8,7 @@ import com.upt.lp.rest_api5.model.Doacao;
 
 public interface DoacaoRepository extends JpaRepository<Doacao, Long> {
 	List<Doacao> findAllByIdRequerenteOrIdDoador(Long idRequerente, Long idDoador);
+	List<Doacao> findByIdDoador(Long idDoador);
+	List<Doacao> findAllByIdRequerente(Long idRequerente);
 }
 

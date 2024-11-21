@@ -2,6 +2,7 @@ package com.upt.lp.rest_api5.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,6 +46,56 @@ public class DoacaoController {
         Doacao doacao = doacaoService.cancelarDoacao(id);
         return ResponseEntity.ok(doacao);
     }
-    
-}
 
+    @GetMapping("/donation-requests-by-donor")
+    public ResponseEntity<List<Doacao>> getDonationRequestsByDonor(@RequestParam Long doadorId) {
+        List<Doacao> donationRequests = doacaoService.getDonationRequestsByDonor(doadorId);
+        return ResponseEntity.ok(donationRequests);
+    }
+    
+	/*
+	 * @PutMapping("/accept-donation/{donationId}") public ResponseEntity<String>
+	 * acceptDonation(@PathVariable Long donationId) { // Lógica para aceitar a
+	 * doação // Exemplo: Verificar se a doação existe, e então marcar como aceita
+	 * boolean success = doacaoService.acceptDonation(donationId);
+	 * 
+	 * if (success) { return ResponseEntity.ok("Donation accepted successfully."); }
+	 * else { return
+	 * ResponseEntity.status(HttpStatus.NOT_FOUND).body("Donation not found."); } }
+	 */
+    
+    @GetMapping("/all-by-requester-id")
+    public ResponseEntity<List<Doacao>> getAllByRequesterId(@RequestParam Long idRequerente) {
+        try {
+            List<Doacao> donations = doacaoService.getAllByRequesterId(idRequerente);
+            return ResponseEntity.ok(donations);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    
+    @PutMapping("/accept-donation/{donationId}")
+    public ResponseEntity<String> acceptDonation(@PathVariable Long donationId) {
+        // Chama o serviço para aceitar a doação
+        boolean success = doacaoService.acceptDonation(donationId);
+
+        if (success) {
+            return ResponseEntity.ok("Donation accepted successfully.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Donation not found.");
+        }
+    }
+    
+    @PutMapping("/reject-donation/{donationId}")
+    public ResponseEntity<String> rejectDonation(@PathVariable Long donationId) {
+        // Chama o serviço para rejeitar a doação
+        boolean success = doacaoService.rejectDonation(donationId);
+
+        if (success) {
+            return ResponseEntity.ok("Donation rejected successfully.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Donation not found.");
+        }
+    }
+
+}

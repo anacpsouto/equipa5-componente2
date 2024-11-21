@@ -83,6 +83,13 @@ public class Doacao {
     public void setIdEquipamento(Long idEquipamento) {
         this.idEquipamento = idEquipamento;
     }
-    
+
+	@Override
+	public String toString() {
+		return "Doacao [id=" + id + ", dataInicio=" + dataInicio + ", dataFim=" + dataFim + ", estadoDoacao="
+				+ estadoDoacao + ", idRequerente=" + idRequerente + ", idDoador=" + idDoador + ", idEquipamento="
+				+ idEquipamento + "]";
+	}
+
 }
 
