@@ -20,6 +20,39 @@ import com.upt.lp.rest_api5.service.EquipamentoService;
 @RestController
 @RequestMapping("/api/equipamentos")
 public class EquipamentoController {
+<<<<<<< HEAD
+    
+    @Autowired
+    private EquipamentoService equipamentoService;
+
+    @GetMapping
+    public List<Equipamento> getAllEquipamentos() {
+        return equipamentoService.getAllEquipamentos();
+    }
+
+    @GetMapping("/{id}")
+    public Equipamento getEquipamentoById(@PathVariable Long id) {
+        return equipamentoService.getEquipamentoById(id);
+    }
+
+    @PostMapping
+    public ResponseEntity<Equipamento> createEquipamento(@RequestBody Equipamento equipamento) {
+        Equipamento savedEquipamento = equipamentoService.createEquipamento(equipamento);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedEquipamento);
+    }
+
+    @PutMapping("/{id}")
+    public Equipamento updateEquipamento (@PathVariable Long id, @RequestBody Equipamento equipamento) {
+        return equipamentoService.updateEquipamento(id, equipamento);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteEquipamento(@PathVariable Long id) {
+        equipamentoService.deleteEquipamento(id);
+        return "Equipamento deletado com sucesso!";
+    }
+}
+=======
 	
 	@Autowired
 	private EquipamentoService equipamentoService;
@@ -53,3 +86,4 @@ public class EquipamentoController {
 	}
 		
 	}
+>>>>>>> main

@@ -1,16 +1,27 @@
 package com.upt.lp.client;
 
+<<<<<<< HEAD
+import java.util.Scanner;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpMethod;
+=======
 import java.awt.print.Book;
 import java.util.Scanner;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+>>>>>>> main
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.upt.lp.rest_api5.model.Acessorio;
 import com.upt.lp.rest_api5.model.Computador;
+<<<<<<< HEAD
+import com.upt.lp.rest_api5.model.Doacao;
+=======
+>>>>>>> main
 import com.upt.lp.rest_api5.model.Utilizador;
 
 @SpringBootApplication
@@ -23,6 +34,12 @@ public class RestApi5ClientApplication {
 	private String rootAPIURLCOMP = "http://localhost:8080/api/computadores";
 
 	private String rootAPIURLUSER = "http://localhost:8080/api/utilizadores";
+<<<<<<< HEAD
+	
+	private String rootAPIURLDOAC = "http://localhost:8080/api/doacoes";
+	
+=======
+>>>>>>> main
 
 	public void registerUser(Scanner scanner) {
 		Utilizador utilizador = new Utilizador();
@@ -53,6 +70,8 @@ public class RestApi5ClientApplication {
 			System.out.println("Failed to register user.");
 		}
 	}
+<<<<<<< HEAD
+=======
 
 	/*
 	 * // Função para fazer login public User loginUser(Scanner scanner) {
@@ -112,6 +131,7 @@ public class RestApi5ClientApplication {
 	 * } else { System.out.println("Invalid login credentials."); } } catch
 	 * (Exception e) { System.out.println("Error: " + e.getMessage()); } }
 	 */
+>>>>>>> main
 	
 	private void login(Scanner scanner) {
 	    System.out.print("Enter your email: ");
@@ -129,6 +149,24 @@ public class RestApi5ClientApplication {
 	            Utilizador loggedInUser = response.getBody();
 	            System.out.println("Login successful! Welcome, " + loggedInUser.getNome());
 
+<<<<<<< HEAD
+	            // Obtendo o ID do usuário logado
+	            Long loggedInUserId = loggedInUser.getId();
+
+	            // Menu com base no tipo de usuário
+	            if ("DONOR".equalsIgnoreCase(loggedInUser.getUserType())) {
+	                donorMenu(scanner, loggedInUserId);
+	            } else if ("RECIPIENT".equalsIgnoreCase(loggedInUser.getUserType())) {
+	                recipientMenu(scanner, loggedInUserId);
+	            } else {
+	                System.out.println("Invalid user type.");
+	            }
+
+	            // Passando o ID do usuário para o método createComputador
+	            createComputador(scanner, loggedInUserId);
+	            createAcessorio(scanner, loggedInUserId);
+
+=======
 	            // Menu com base no tipo de usuário
 	            if ("DONOR".equalsIgnoreCase(loggedInUser.getUserType())) {
 	                donorMenu(scanner);
@@ -137,6 +175,7 @@ public class RestApi5ClientApplication {
 	            } else {
 	                System.out.println("Invalid user type.");
 	            }
+>>>>>>> main
 	        } else {
 	            System.out.println("Invalid login credentials.");
 	        }
@@ -145,6 +184,10 @@ public class RestApi5ClientApplication {
 	    }
 	}
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> main
 	public void updateUser(Scanner scanner) {
 		System.out.print("\nEnter the ID of the user to update: ");
 		Long id = scanner.nextLong();
@@ -259,7 +302,11 @@ public class RestApi5ClientApplication {
 		}
 	}
 
+<<<<<<< HEAD
+	public void createAcessorio(Scanner scanner, Long loggedInUserId) {
+=======
 	public void createAcessorio(Scanner scanner) {
+>>>>>>> main
 
 		Acessorio acessorio = new Acessorio();
 
@@ -287,6 +334,75 @@ public class RestApi5ClientApplication {
 		String accessoryConservation = scanner.nextLine();
 		acessorio.setEstadoConservacao(accessoryConservation);
 
+<<<<<<< HEAD
+		// Atribuindo o userID (o ID do usuário logado)
+	    acessorio.setUserID(loggedInUserId);  // Atribuindo o ID do usuário logado ao acessório
+
+	    ResponseEntity<Acessorio> response = restTemplate.postForEntity(rootAPIURLACE, acessorio, Acessorio.class);
+
+	    if (response.getStatusCode().is2xxSuccessful()) {
+	        Acessorio body = response.getBody();
+	        if (body != null) {
+	            System.out.println(body.toString());
+	        } else {
+	            System.out.println("No body");
+	        }
+	    } else {
+	        System.out.println("Nothing found");
+	    }
+	}
+	public void createComputador(Scanner scanner, Long loggedInUserId) {
+
+	    Computador computador = new Computador();
+
+	    System.out.print("\nEnter the type of computer: (DESKTOP or LAPTOP): ");
+	    String computerType = scanner.nextLine();
+	    computador.setType(computerType);
+
+	    System.out.print("\nEnter RAM capacity: (EX: 4GB, 8GB, 16GB, 32GB or more): ");
+	    String ramCapacity = scanner.nextLine();
+	    computador.setRam(ramCapacity);
+
+	    System.out.print("\nEnter the drive type: (EX: HDD (Hard Disk Drive) or SSD (Solid State Drive): ");
+	    String driveType = scanner.nextLine();
+	    computador.setDisco(driveType);
+
+	    System.out.print("\nEnter the processor (EX: Intel, AMD, Apple Silicon):  ");
+	    String processorType = scanner.nextLine();
+	    computador.setProcessador(processorType);
+
+	    System.out.print("\nEnter the name: ");
+	    String computerName = scanner.nextLine();
+	    computador.setNome(computerName);
+
+	    System.out.print("\nEnter the year: ");
+	    String computerYear = scanner.nextLine();
+	    computador.setAno(computerYear);
+
+	    System.out.print("\nEnter computer brand (EX: Dell, HP, Lenovo, Apple, Acer, ASUS): ");
+	    String computerbrand = scanner.nextLine();
+	    computador.setBrand(computerbrand);
+
+	    System.out.print("\nEnter the equipment conservation status:");
+	    String computerConservation = scanner.nextLine();
+	    computador.setEstadoConservacao(computerConservation);
+
+	    // Atribuindo o userID (o ID do usuário logado)
+	    computador.setUserID(loggedInUserId);  // Esse é o ponto chave. Preencha com o ID do usuário
+
+	    ResponseEntity<Computador> response = restTemplate.postForEntity(rootAPIURLCOMP, computador, Computador.class);
+
+	    if (response.getStatusCode().is2xxSuccessful()) {
+	        Computador body = response.getBody();
+	        if (body != null) {
+	            System.out.println(body.toString());
+	        } else {
+	            System.out.println("No body");
+	        }
+	    } else {
+	        System.out.println("Nothing found");
+	    }
+=======
 		/*
 		 * book.setAuthor("Thiago Test 071124"); book.setTitle("Test Book 071124");
 		 * book.setIsbn("98731071124");
@@ -355,12 +471,17 @@ public class RestApi5ClientApplication {
 		} else {
 			System.out.println("Nothing found");
 		}
+>>>>>>> main
 	}
 
 	public void deleteAcessorio(Long id) {
 		try {
 			// Primeiro, pesquisar o livro pelo ID para verificar se ele existe
+<<<<<<< HEAD
+			ResponseEntity<Acessorio> response = restTemplate.getForEntity(rootAPIURLACE + "/" + id, Acessorio.class);
+=======
 			ResponseEntity<Book> response = restTemplate.getForEntity(rootAPIURLACE + "/" + id, Book.class);
+>>>>>>> main
 
 			if (response.getStatusCode().is2xxSuccessful()) {
 				// O livro existe, agora podemos fazer o DELETE
@@ -521,6 +642,10 @@ public class RestApi5ClientApplication {
 	    }
 	}
 
+<<<<<<< HEAD
+	private void donorMenu(Scanner scanner, Long loggedInUserId) {
+		while (true) {
+=======
 	private void donorMenu(Scanner scanner) {
 		while (true) {
 			/*
@@ -533,12 +658,17 @@ public class RestApi5ClientApplication {
 			 * System.out.println("6. Deletar Computador"); System.out.println("7. Sair");
 			 * System.out.print("Escolha uma opção: ");
 			 */
+>>>>>>> main
 
 			System.out.println("\n===== DONOR MENU =====");
 			System.out.println("1. Add Equipment");
 			System.out.println("2. Search Equipment");
 			System.out.println("3. Edit Equipment");
 			System.out.println("4. Delete Equipment");
+<<<<<<< HEAD
+			System.out.println("5. Logout");
+=======
+>>>>>>> main
 
 			int option = scanner.nextInt();
 			scanner.nextLine(); // Consumir a nova linha
@@ -551,10 +681,17 @@ public class RestApi5ClientApplication {
 				scanner.nextLine();
 
 				if (choiceEquipmentType == 1) {
+<<<<<<< HEAD
+					createComputador(scanner, loggedInUserId);
+					break;
+				} else {
+					createAcessorio(scanner, loggedInUserId);
+=======
 					createComputador(scanner);
 					break;
 				} else {
 					createAcessorio(scanner);
+>>>>>>> main
 					break;
 				}
 			case 2:
@@ -627,12 +764,24 @@ public class RestApi5ClientApplication {
 					Long idToDelete = scanner.nextLong();
 					scanner.nextLine();
 					deleteComputador(idToDelete);
+<<<<<<< HEAD
+=======
 					break;
+>>>>>>> main
 				} else {
 					System.out.print("\nEnter the ID of the accessory you want to delete: ");
 					Long idToDelete = scanner.nextLong();
 					scanner.nextLine();
 					deleteAcessorio(idToDelete);
+<<<<<<< HEAD
+				}
+				break;
+				
+			case 5:
+                // Opção de logout
+                System.out.println("Logging out...");
+                return;
+=======
 					break;
 				}
 
@@ -647,6 +796,7 @@ public class RestApi5ClientApplication {
 				
 				// case update:
 				
+>>>>>>> main
 			
 			default:
 				System.out.println("Opção inválida. Tente novamente.");
@@ -655,6 +805,120 @@ public class RestApi5ClientApplication {
 	
 	}
 	
+<<<<<<< HEAD
+	private void recipientMenu(Scanner scanner, Long loggedInUserId) {
+	    while (true) {
+	        System.out.println("\n===== RECIPIENT MENU =====");
+	        System.out.println("1. Register donation");
+	        System.out.println("2. View all donations by email");
+	        System.out.println("3. Finish/cancel donation");
+	        System.out.println("4. Exit");
+
+	        int option = scanner.nextInt();
+	        scanner.nextLine(); // Consumir a nova linha
+
+	        switch (option) {
+	            case 1:
+	                registrarPedidoDoacao(scanner, loggedInUserId);
+	                break;
+
+	            case 2:
+	                System.out.print("\nEnter the email to view all related donations: ");
+	                String email = scanner.nextLine();
+	                getAllDonationsByEmail(email);
+	                break;
+
+	            case 3:
+	                System.out.print("\nEnter the ID of the donation to finish or cancel: ");
+	                Long idDoacao = scanner.nextLong();
+	                scanner.nextLine();
+	                finishOrCancelDonation(scanner, idDoacao);
+	                break;
+
+	            case 4:
+	                System.out.println("Exiting Recipient Menu...");
+	                return;
+
+	            default:
+	                System.out.println("Invalid option. Please try again.");
+	        }
+	    }
+	}
+
+	
+	private void registrarPedidoDoacao(Scanner scanner, Long loggedInUserId) {
+	    System.out.print("Enter the ID of the equipment you want to request: ");
+	    Long idEquipamento = scanner.nextLong();
+	    scanner.nextLine(); // Consumir a linha restante
+
+	    System.out.print("Enter the ID of the donor: ");
+	    Long idDoador = scanner.nextLong();
+	    scanner.nextLine();
+
+	    String url = rootAPIURLDOAC + "/registrar"
+	            + "?idRequerente=" + loggedInUserId
+	            + "&idDoador=" + idDoador
+	            + "&idEquipamento=" + idEquipamento;
+
+	    try {
+	        ResponseEntity<Doacao> response = restTemplate.postForEntity(url, null, Doacao.class);
+
+	        if (response.getStatusCode().is2xxSuccessful()) {
+	            System.out.println("Donation request successfully registered!");
+	            System.out.println(response.getBody());
+	        } else {
+	            System.out.println("Failed to register donation request.");
+	        }
+	    } catch (Exception e) {
+	        System.out.println("Error: " + e.getMessage());
+	    }
+	}
+	
+	private void getAllDonationsByEmail(String email) {
+	    String url = rootAPIURLDOAC + "/all-by-email?email=" + email;
+
+	    try {
+	        ResponseEntity<Doacao[]> response = restTemplate.getForEntity(url, Doacao[].class);
+
+	        if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
+	            Doacao[] donations = response.getBody();
+	            System.out.println("\nDonations associated with email " + email + ":");
+	            for (Doacao doacao : donations) {
+	                System.out.println(doacao);
+	            }
+	        } else {
+	            System.out.println("No donations found for the provided email.");
+	        }
+	    } catch (Exception e) {
+	        System.out.println("Error: " + e.getMessage());
+	    }
+	}
+
+	private void finishOrCancelDonation(Scanner scanner, Long idDoacao) {
+	    System.out.println("\nWhat action would you like to take for this donation?");
+	    System.out.println("1: Finish Donation\n2: Cancel Donation");
+	    int action = scanner.nextInt();
+	    scanner.nextLine();
+
+	    String actionUrl = (action == 1) ? "/finalizar/" : "/cancelar/";
+	    String url = rootAPIURLDOAC + actionUrl + idDoacao;
+
+	    try {
+	        ResponseEntity<Doacao> response = restTemplate.exchange(url, HttpMethod.PUT, null, Doacao.class);
+
+	        if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
+	            System.out.println((action == 1 ? "Donation successfully finished!" : "Donation successfully canceled!"));
+	            System.out.println(response.getBody());
+	        } else {
+	            System.out.println("Failed to update the donation status.");
+	        }
+	    } catch (Exception e) {
+	        System.out.println("Error: " + e.getMessage());
+	    }
+	}
+
+
+=======
 	private void recipientMenu(Scanner scanner) {
 		while (true) {
 			/*
@@ -788,6 +1052,7 @@ public class RestApi5ClientApplication {
 		}
 	
 	}
+>>>>>>> main
 
 	
 
@@ -823,6 +1088,9 @@ public class RestApi5ClientApplication {
 	
 	}
 	
+<<<<<<< HEAD
+}
+=======
 }
 
 		/*
@@ -967,3 +1235,4 @@ public class RestApi5ClientApplication {
 		}
 	}*/
 
+>>>>>>> main
