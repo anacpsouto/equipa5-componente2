@@ -1,5 +1,6 @@
 package com.upt.lp.client;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -27,10 +28,9 @@ public class RestApi5ClientApplication {
 	private String rootAPIURLCOMP = "http://localhost:8080/api/computadores";
 
 	private String rootAPIURLUSER = "http://localhost:8080/api/utilizadores";
-	
+
 	private String rootAPIURLDOAC = "http://localhost:8080/api/doacoes";
 	
-
 	public void registerUser(Scanner scanner) {
 		Utilizador utilizador = new Utilizador();
 
@@ -100,7 +100,6 @@ public class RestApi5ClientApplication {
 	        System.out.println("Error: " + e.getMessage());
 	    }
 	}
-
 
 	public void updateUser(Scanner scanner) {
 		System.out.print("\nEnter the ID of the user to update: ");
@@ -216,6 +215,7 @@ public class RestApi5ClientApplication {
 		}
 	}
 
+  
 	public void createAcessorio(Scanner scanner, Long loggedInUserId) {
 
 		Acessorio acessorio = new Acessorio();
@@ -316,6 +316,7 @@ public class RestApi5ClientApplication {
 	public void deleteAcessorio(Long id) {
 		try {
 			// Primeiro, pesquisar o livro pelo ID para verificar se ele existe
+      
 			ResponseEntity<Acessorio> response = restTemplate.getForEntity(rootAPIURLACE + "/" + id, Acessorio.class);
 
 			if (response.getStatusCode().is2xxSuccessful()) {
@@ -736,6 +737,7 @@ public class RestApi5ClientApplication {
 	    }
 	}
 
+
 	
 	private void acceptDonation(Long donationId) {
 	    // Função para aceitar doação
@@ -752,6 +754,7 @@ public class RestApi5ClientApplication {
 	    }
 	}
 	
+  
 	private void rejectDonation(Long donationId) {
 	    // Função para recusar doação
 	    String url = rootAPIURLDOAC + "/reject-donation/" + donationId;
@@ -914,9 +917,6 @@ public class RestApi5ClientApplication {
 	    }
 	}
 
-
-
-	
 
 	public static void main(String[] args) {
 		RestApi5ClientApplication myApp = new RestApi5ClientApplication();

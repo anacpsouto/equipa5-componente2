@@ -46,7 +46,7 @@ public class DoacaoController {
         Doacao doacao = doacaoService.cancelarDoacao(id);
         return ResponseEntity.ok(doacao);
     }
-    
+
     @GetMapping("/donation-requests-by-donor")
     public ResponseEntity<List<Doacao>> getDonationRequestsByDonor(@RequestParam Long doadorId) {
         List<Doacao> donationRequests = doacaoService.getDonationRequestsByDonor(doadorId);
@@ -99,5 +99,3 @@ public class DoacaoController {
     }
 
 }
-    
-

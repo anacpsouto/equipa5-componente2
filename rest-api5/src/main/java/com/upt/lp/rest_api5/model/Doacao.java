@@ -90,6 +90,6 @@ public class Doacao {
 				+ estadoDoacao + ", idRequerente=" + idRequerente + ", idDoador=" + idDoador + ", idEquipamento="
 				+ idEquipamento + "]";
 	}
-      
+
 }
 
