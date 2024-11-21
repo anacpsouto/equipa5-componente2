@@ -1,16 +1,27 @@
 package com.upt.lp.client;
 
+<<<<<<< HEAD
 import java.util.Scanner;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpMethod;
+=======
+import java.awt.print.Book;
+import java.util.Scanner;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+>>>>>>> main
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.upt.lp.rest_api5.model.Acessorio;
 import com.upt.lp.rest_api5.model.Computador;
+<<<<<<< HEAD
 import com.upt.lp.rest_api5.model.Doacao;
+=======
+>>>>>>> main
 import com.upt.lp.rest_api5.model.Utilizador;
 
 @SpringBootApplication
@@ -23,9 +34,12 @@ public class RestApi5ClientApplication {
 	private String rootAPIURLCOMP = "http://localhost:8080/api/computadores";
 
 	private String rootAPIURLUSER = "http://localhost:8080/api/utilizadores";
+<<<<<<< HEAD
 	
 	private String rootAPIURLDOAC = "http://localhost:8080/api/doacoes";
 	
+=======
+>>>>>>> main
 
 	public void registerUser(Scanner scanner) {
 		Utilizador utilizador = new Utilizador();
@@ -56,6 +70,68 @@ public class RestApi5ClientApplication {
 			System.out.println("Failed to register user.");
 		}
 	}
+<<<<<<< HEAD
+=======
+
+	/*
+	 * // Função para fazer login public User loginUser(Scanner scanner) {
+	 * System.out.print("Enter your email: "); String email = scanner.nextLine();
+	 * 
+	 * System.out.print("Enter your password: "); String password =
+	 * scanner.nextLine();
+	 * 
+	 * // Enviar para o servidor via GET para validar o login ResponseEntity<User>
+	 * response = restTemplate.getForEntity(rootAPIURLUSER + "/login?email=" + email
+	 * + "&password=" + password, User.class);
+	 * 
+	 * if (response.getStatusCode().is2xxSuccessful()) { User user =
+	 * response.getBody(); System.out.println("Login successful. Welcome " +
+	 * user.getName()); return user; } else {
+	 * System.out.println("Invalid login credentials."); return null; } }
+	 */
+
+	/*
+	 * // Método para fazer login private void login(Scanner scanner) {
+	 * System.out.print("Enter your email: "); String email = scanner.nextLine();
+	 * 
+	 * System.out.print("Enter your password: "); String password =
+	 * scanner.nextLine();
+	 * 
+	 * String loginUrl = rootAPIURLUSER + "/login?email=" + email + "&senha=" +
+	 * password;
+	 * 
+	 * try { ResponseEntity<String> response = restTemplate.postForEntity(loginUrl,
+	 * null, String.class);
+	 * 
+	 * if (response.getStatusCode().is2xxSuccessful()) {
+	 * System.out.println(response.getBody()); } else {
+	 * System.out.println("Invalid login credentials."); } } catch (Exception e) {
+	 * System.out.println("Error: " + e.getMessage()); } }
+	 */
+
+	/*
+	 * private void login(Scanner scanner) { System.out.print("Enter your email: ");
+	 * String email = scanner.nextLine();
+	 * 
+	 * System.out.print("Enter your password: "); String password =
+	 * scanner.nextLine();
+	 * 
+	 * String loginUrl = rootAPIURLUSER + "/login?email=" + email + "&senha=" +
+	 * password;
+	 * 
+	 * try { ResponseEntity<Utilizador> response =
+	 * restTemplate.postForEntity(loginUrl, null, Utilizador.class);
+	 * 
+	 * if (response.getStatusCode().is2xxSuccessful()) { Utilizador loggedInUser =
+	 * response.getBody(); System.out.println("Login successful! Welcome, " +
+	 * loggedInUser.getNome()); if
+	 * ("DONOR".equalsIgnoreCase(loggedInUser.getUserType())) { donorMenu(scanner);
+	 * } else if ("RECIPIENT".equalsIgnoreCase(loggedInUser.getUserType())) {
+	 * recipientMenu(scanner); } else { System.out.println("Invalid user type."); }
+	 * } else { System.out.println("Invalid login credentials."); } } catch
+	 * (Exception e) { System.out.println("Error: " + e.getMessage()); } }
+	 */
+>>>>>>> main
 	
 	private void login(Scanner scanner) {
 	    System.out.print("Enter your email: ");
@@ -73,6 +149,7 @@ public class RestApi5ClientApplication {
 	            Utilizador loggedInUser = response.getBody();
 	            System.out.println("Login successful! Welcome, " + loggedInUser.getNome());
 
+<<<<<<< HEAD
 	            // Obtendo o ID do usuário logado
 	            Long loggedInUserId = loggedInUser.getId();
 
@@ -89,6 +166,16 @@ public class RestApi5ClientApplication {
 	            createComputador(scanner, loggedInUserId);
 	            createAcessorio(scanner, loggedInUserId);
 
+=======
+	            // Menu com base no tipo de usuário
+	            if ("DONOR".equalsIgnoreCase(loggedInUser.getUserType())) {
+	                donorMenu(scanner);
+	            } else if ("RECIPIENT".equalsIgnoreCase(loggedInUser.getUserType())) {
+	                recipientMenu(scanner);
+	            } else {
+	                System.out.println("Invalid user type.");
+	            }
+>>>>>>> main
 	        } else {
 	            System.out.println("Invalid login credentials.");
 	        }
@@ -97,7 +184,10 @@ public class RestApi5ClientApplication {
 	    }
 	}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 	public void updateUser(Scanner scanner) {
 		System.out.print("\nEnter the ID of the user to update: ");
 		Long id = scanner.nextLong();
@@ -212,7 +302,11 @@ public class RestApi5ClientApplication {
 		}
 	}
 
+<<<<<<< HEAD
 	public void createAcessorio(Scanner scanner, Long loggedInUserId) {
+=======
+	public void createAcessorio(Scanner scanner) {
+>>>>>>> main
 
 		Acessorio acessorio = new Acessorio();
 
@@ -240,6 +334,7 @@ public class RestApi5ClientApplication {
 		String accessoryConservation = scanner.nextLine();
 		acessorio.setEstadoConservacao(accessoryConservation);
 
+<<<<<<< HEAD
 		// Atribuindo o userID (o ID do usuário logado)
 	    acessorio.setUserID(loggedInUserId);  // Atribuindo o ID do usuário logado ao acessório
 
@@ -307,12 +402,86 @@ public class RestApi5ClientApplication {
 	    } else {
 	        System.out.println("Nothing found");
 	    }
+=======
+		/*
+		 * book.setAuthor("Thiago Test 071124"); book.setTitle("Test Book 071124");
+		 * book.setIsbn("98731071124");
+		 */
+
+		ResponseEntity<Acessorio> response = restTemplate.postForEntity(rootAPIURLACE, acessorio, Acessorio.class);
+
+		if (response.getStatusCode().is2xxSuccessful()) {
+			Acessorio body = response.getBody();
+			if (body != null) {
+				System.out.println(body.toString());
+				System.out.println("Equipment added successfully!");
+			} else {
+				System.out.println("No body");
+			}
+		} else {
+			System.out.println("Nothing found");
+		}
+	}
+
+	public void createComputador(Scanner scanner) {
+
+		Computador computador = new Computador();
+
+		System.out.print("\nEnter the type of computer: (DESKTOP or LAPTOP): ");
+		String computerType = scanner.nextLine();
+		computador.setType(computerType);
+
+		System.out.print("\nEnter RAM capacity: (EX: 4GB, 8GB, 16GB, 32GB or more): ");
+		String ramCapacity = scanner.nextLine();
+		computador.setRam(ramCapacity);
+
+		System.out.print("\nEnter the drive type: (EX: HDD (Hard Disk Drive) or SSD (Solid State Drive): ");
+		String driveType = scanner.nextLine();
+		computador.setDisco(driveType);
+
+		System.out.print("\nEnter the processor (EX: Intel, AMD, Apple Silicon):  ");
+		String processorType = scanner.nextLine();
+		computador.setProcessador(processorType);
+
+		System.out.print("\nEnter the name: ");
+		String computerName = scanner.nextLine();
+		computador.setNome(computerName);
+
+		System.out.print("\nEnter the year: ");
+		String computerYear = scanner.nextLine();
+		computador.setAno(computerYear);
+
+		System.out.print("\nEnter computer brand (EX: Dell, HP, Lenovo, Apple, Acer, ASUS): ");
+		String computerbrand = scanner.nextLine();
+		computador.setBrand(computerbrand);
+
+		System.out.print("\nEnter the equipment conservation status:");
+		String computerConservation = scanner.nextLine();
+		computador.setEstadoConservacao(computerConservation);
+
+		ResponseEntity<Computador> response = restTemplate.postForEntity(rootAPIURLCOMP, computador, Computador.class);
+
+		if (response.getStatusCode().is2xxSuccessful()) {
+			Computador body = response.getBody();
+			if (body != null) {
+				System.out.println(body.toString());
+			} else {
+				System.out.println("No body");
+			}
+		} else {
+			System.out.println("Nothing found");
+		}
+>>>>>>> main
 	}
 
 	public void deleteAcessorio(Long id) {
 		try {
 			// Primeiro, pesquisar o livro pelo ID para verificar se ele existe
+<<<<<<< HEAD
 			ResponseEntity<Acessorio> response = restTemplate.getForEntity(rootAPIURLACE + "/" + id, Acessorio.class);
+=======
+			ResponseEntity<Book> response = restTemplate.getForEntity(rootAPIURLACE + "/" + id, Book.class);
+>>>>>>> main
 
 			if (response.getStatusCode().is2xxSuccessful()) {
 				// O livro existe, agora podemos fazer o DELETE
@@ -473,15 +642,33 @@ public class RestApi5ClientApplication {
 	    }
 	}
 
+<<<<<<< HEAD
 	private void donorMenu(Scanner scanner, Long loggedInUserId) {
 		while (true) {
+=======
+	private void donorMenu(Scanner scanner) {
+		while (true) {
+			/*
+			 * System.out.println("\n===== MENU =====");
+			 * System.out.println("1. Criar Acessório"); --------- OK
+			 * System.out.println("2. Listar Acessórios");
+			 * System.out.println("3. Deletar Acessório");
+			 * System.out.println("4. Criar Computador"); --------- OK
+			 * System.out.println("5. Listar Computadores");
+			 * System.out.println("6. Deletar Computador"); System.out.println("7. Sair");
+			 * System.out.print("Escolha uma opção: ");
+			 */
+>>>>>>> main
 
 			System.out.println("\n===== DONOR MENU =====");
 			System.out.println("1. Add Equipment");
 			System.out.println("2. Search Equipment");
 			System.out.println("3. Edit Equipment");
 			System.out.println("4. Delete Equipment");
+<<<<<<< HEAD
 			System.out.println("5. Logout");
+=======
+>>>>>>> main
 
 			int option = scanner.nextInt();
 			scanner.nextLine(); // Consumir a nova linha
@@ -494,10 +681,17 @@ public class RestApi5ClientApplication {
 				scanner.nextLine();
 
 				if (choiceEquipmentType == 1) {
+<<<<<<< HEAD
 					createComputador(scanner, loggedInUserId);
 					break;
 				} else {
 					createAcessorio(scanner, loggedInUserId);
+=======
+					createComputador(scanner);
+					break;
+				} else {
+					createAcessorio(scanner);
+>>>>>>> main
 					break;
 				}
 			case 2:
@@ -570,11 +764,16 @@ public class RestApi5ClientApplication {
 					Long idToDelete = scanner.nextLong();
 					scanner.nextLine();
 					deleteComputador(idToDelete);
+<<<<<<< HEAD
+=======
+					break;
+>>>>>>> main
 				} else {
 					System.out.print("\nEnter the ID of the accessory you want to delete: ");
 					Long idToDelete = scanner.nextLong();
 					scanner.nextLine();
 					deleteAcessorio(idToDelete);
+<<<<<<< HEAD
 				}
 				break;
 				
@@ -582,6 +781,22 @@ public class RestApi5ClientApplication {
                 // Opção de logout
                 System.out.println("Logging out...");
                 return;
+=======
+					break;
+				}
+
+				/*
+				 * case 3: System.out.print("Digite o ID do acessório a ser deletado: "); Long
+				 * acessorioId = scanner.nextLong(); myApp.deleteAcessorio(acessorioId); break;
+				 * case 6: System.out.print("Digite o ID do computador a ser deletado: "); Long
+				 * computadorId = scanner.nextLong(); myApp.deleteComputador(computadorId);
+				 * break; case 7: System.out.println("Encerrando o programa...");
+				 * scanner.close(); System.exit(0);
+				 */
+				
+				// case update:
+				
+>>>>>>> main
 			
 			default:
 				System.out.println("Opção inválida. Tente novamente.");
@@ -590,6 +805,7 @@ public class RestApi5ClientApplication {
 	
 	}
 	
+<<<<<<< HEAD
 	private void recipientMenu(Scanner scanner, Long loggedInUserId) {
 	    while (true) {
 	        System.out.println("\n===== RECIPIENT MENU =====");
@@ -702,6 +918,141 @@ public class RestApi5ClientApplication {
 	}
 
 
+=======
+	private void recipientMenu(Scanner scanner) {
+		while (true) {
+			/*
+			 * System.out.println("\n===== MENU =====");
+			 * System.out.println("1. Criar Acessório"); --------- OK
+			 * System.out.println("2. Listar Acessórios");
+			 * System.out.println("3. Deletar Acessório");
+			 * System.out.println("4. Criar Computador"); --------- OK
+			 * System.out.println("5. Listar Computadores");
+			 * System.out.println("6. Deletar Computador"); System.out.println("7. Sair");
+			 * System.out.print("Escolha uma opção: ");
+			 */
+
+			System.out.println("\n===== RECIPIENT MENU =====");
+			System.out.println("1. Add Equipment TESTE TESTE");
+			System.out.println("2. Search Equipment");
+			System.out.println("3. Edit Equipment");
+			System.out.println("4. Delete Equipment");
+
+			int option = scanner.nextInt();
+			scanner.nextLine(); // Consumir a nova linha
+
+			switch (option) {
+			case 1:
+				System.out.println("\nWhat type of equipment will be add? Choose one of the options below.\n"
+						+ "1: Computer (or notebook)\n" + "2: Accessories");
+				int choiceEquipmentType = scanner.nextInt();
+				scanner.nextLine();
+
+				if (choiceEquipmentType == 1) {
+					createComputador(scanner);
+					break;
+				} else {
+					createAcessorio(scanner);
+					break;
+				}
+			case 2:
+				System.out
+						.println("\nWhat type of equipment do you want to research? Choose one of the options below.\n"
+								+ "1: Computer (or notebook)\n" + "2: Accessories");
+				choiceEquipmentType = scanner.nextInt();
+				scanner.nextLine();
+
+				if (choiceEquipmentType == 1) {
+					System.out.println(
+							"\nDo you want to search for all computers or for a specific one? Choose one of the options below.\n"
+									+ "1: All computers. \n" + "2: A specific. ");
+					int choiceResearchType = scanner.nextInt();
+					scanner.nextLine();
+
+					if (choiceResearchType == 1) {
+						getAllComputadores();
+						break;
+					} else {
+						System.out.println("\nEnter the ID of the computer you want to search: ");
+						Long idSearch = scanner.nextLong();
+						scanner.nextLine();
+						getComputadorById(idSearch);
+						break;
+					}
+				} else {
+					System.out.println(
+							"\nDo you want to search for all accessories or for a specific one? Choose one of the options below.\n"
+									+ "1: All accessories. \n" + "2: A specific. ");
+					int choiceResearchType = scanner.nextInt();
+					scanner.nextLine();
+
+					if (choiceResearchType == 1) {
+						getAllAcessorios();
+						break;
+					} else {
+						System.out.print("\nEnter the ID of the accessory you want to search: ");
+						Long idSearch = scanner.nextLong();
+						scanner.nextLine();
+						getAcessorioById(idSearch);
+						break;
+					}
+
+				}
+				
+			case 3: 
+			    System.out.println("\nWhat type of equipment do you want to update? Choose one of the options below.\n"
+			                       + "1: Computer (or notebook)\n"
+			                       + "2: Accessories");
+			    choiceEquipmentType = scanner.nextInt();
+			    scanner.nextLine();
+
+			    if (choiceEquipmentType == 1) {
+			        updateComputador(scanner);
+			    } else {
+			        updateAcessorio(scanner);
+			    }
+			    break;
+			    
+				
+			case 4:
+				System.out.println("\nWhat type of equipment do you want to delete? Choose one of the options below.\n"
+						+ "1: Computer (or notebook)\n" + "2: Accessories");
+				choiceEquipmentType = scanner.nextInt();
+				scanner.nextLine();
+
+				if (choiceEquipmentType == 1) {
+					System.out.print("\nEnter the ID of the computer you want to delete: ");
+					Long idToDelete = scanner.nextLong();
+					scanner.nextLine();
+					deleteComputador(idToDelete);
+					break;
+				} else {
+					System.out.print("\nEnter the ID of the accessory you want to delete: ");
+					Long idToDelete = scanner.nextLong();
+					scanner.nextLine();
+					deleteAcessorio(idToDelete);
+					break;
+				}
+
+				/*
+				 * case 3: System.out.print("Digite o ID do acessório a ser deletado: "); Long
+				 * acessorioId = scanner.nextLong(); myApp.deleteAcessorio(acessorioId); break;
+				 * case 6: System.out.print("Digite o ID do computador a ser deletado: "); Long
+				 * computadorId = scanner.nextLong(); myApp.deleteComputador(computadorId);
+				 * break; case 7: System.out.println("Encerrando o programa...");
+				 * scanner.close(); System.exit(0);
+				 */
+				
+				// case update:
+				
+			
+			default:
+				System.out.println("Opção inválida. Tente novamente.");
+			}
+		}
+	
+	}
+>>>>>>> main
 
 	
 
@@ -737,4 +1088,151 @@ public class RestApi5ClientApplication {
 	
 	}
 	
+<<<<<<< HEAD
 }
+=======
+}
+
+		/*
+		 * //myApp.updateAcessorio(); //System.out.println("Sucessfull");
+		 * myApp.createAcessorio(); System.out.println("Sucessfull");
+		 * myApp.getAllAcessorios(); System.out.println("Sucessfull");
+		 * 
+		 * myApp.getAcessorioById((long) 3); System.out.println("Sucessfull");
+		 * //myApp.deleteAcessorio((long) 20); //System.out.println("Sucessfull");
+		 * //myApp.getAllAcessorios(); //System.out.println("Sucessfull");
+		 */
+
+		/*while (true) {
+			
+			 * System.out.println("\n===== MENU =====");
+			 * System.out.println("1. Criar Acessório"); --------- OK
+			 * System.out.println("2. Listar Acessórios");
+			 * System.out.println("3. Deletar Acessório");
+			 * System.out.println("4. Criar Computador"); --------- OK
+			 * System.out.println("5. Listar Computadores");
+			 * System.out.println("6. Deletar Computador"); System.out.println("7. Sair");
+			 * System.out.print("Escolha uma opção: ");
+			 
+
+			System.out.println("\n===== DONOR MENU =====");
+			System.out.println("1. Add Equipment");
+			System.out.println("2. Search Equipment");
+			System.out.println("3. Edit Equipment");
+			System.out.println("4. Delete Equipment");
+
+			int option = scanner.nextInt();
+			scanner.nextLine(); // Consumir a nova linha
+
+			switch (option) {
+			case 1:
+				System.out.println("\nWhat type of equipment will be add? Choose one of the options below.\n"
+						+ "1: Computer (or notebook)\n" + "2: Accessories");
+				int choiceEquipmentType = scanner.nextInt();
+				scanner.nextLine();
+
+				if (choiceEquipmentType == 1) {
+					myApp.createComputador(scanner);
+					break;
+				} else {
+					myApp.createAcessorio(scanner);
+					break;
+				}
+			case 2:
+				System.out
+						.println("\nWhat type of equipment do you want to research? Choose one of the options below.\n"
+								+ "1: Computer (or notebook)\n" + "2: Accessories");
+				choiceEquipmentType = scanner.nextInt();
+				scanner.nextLine();
+
+				if (choiceEquipmentType == 1) {
+					System.out.println(
+							"\nDo you want to search for all computers or for a specific one? Choose one of the options below.\n"
+									+ "1: All computers. \n" + "2: A specific. ");
+					int choiceResearchType = scanner.nextInt();
+					scanner.nextLine();
+
+					if (choiceResearchType == 1) {
+						myApp.getAllComputadores();
+						break;
+					} else {
+						System.out.println("\nEnter the ID of the computer you want to search: ");
+						Long idSearch = scanner.nextLong();
+						scanner.nextLine();
+						myApp.getComputadorById(idSearch);
+						break;
+					}
+				} else {
+					System.out.println(
+							"\nDo you want to search for all accessories or for a specific one? Choose one of the options below.\n"
+									+ "1: All accessories. \n" + "2: A specific. ");
+					int choiceResearchType = scanner.nextInt();
+					scanner.nextLine();
+
+					if (choiceResearchType == 1) {
+						myApp.getAllAcessorios();
+						break;
+					} else {
+						System.out.print("\nEnter the ID of the accessory you want to search: ");
+						Long idSearch = scanner.nextLong();
+						scanner.nextLine();
+						myApp.getAcessorioById(idSearch);
+						break;
+					}
+
+				}
+				
+			case 3: 
+			    System.out.println("\nWhat type of equipment do you want to update? Choose one of the options below.\n"
+			                       + "1: Computer (or notebook)\n"
+			                       + "2: Accessories");
+			    choiceEquipmentType = scanner.nextInt();
+			    scanner.nextLine();
+
+			    if (choiceEquipmentType == 1) {
+			        myApp.updateComputador(scanner);
+			    } else {
+			        myApp.updateAcessorio(scanner);
+			    }
+			    break;
+			    
+				
+			case 4:
+				System.out.println("\nWhat type of equipment do you want to delete? Choose one of the options below.\n"
+						+ "1: Computer (or notebook)\n" + "2: Accessories");
+				choiceEquipmentType = scanner.nextInt();
+				scanner.nextLine();
+
+				if (choiceEquipmentType == 1) {
+					System.out.print("\nEnter the ID of the computer you want to delete: ");
+					Long idToDelete = scanner.nextLong();
+					scanner.nextLine();
+					myApp.deleteComputador(idToDelete);
+					break;
+				} else {
+					System.out.print("\nEnter the ID of the accessory you want to delete: ");
+					Long idToDelete = scanner.nextLong();
+					scanner.nextLine();
+					myApp.deleteAcessorio(idToDelete);
+					break;
+				}
+
+				
+				 * case 3: System.out.print("Digite o ID do acessório a ser deletado: "); Long
+				 * acessorioId = scanner.nextLong(); myApp.deleteAcessorio(acessorioId); break;
+				 * case 6: System.out.print("Digite o ID do computador a ser deletado: "); Long
+				 * computadorId = scanner.nextLong(); myApp.deleteComputador(computadorId);
+				 * break; case 7: System.out.println("Encerrando o programa...");
+				 * scanner.close(); System.exit(0);
+				 
+				
+				// case update:
+				
+			
+			default:
+				System.out.println("Opção inválida. Tente novamente.");
+			}
+		}
+	}*/
+
+>>>>>>> main
