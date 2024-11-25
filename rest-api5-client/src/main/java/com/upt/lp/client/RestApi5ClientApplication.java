@@ -89,9 +89,6 @@ public class RestApi5ClientApplication {
 	                System.out.println("Invalid user type.");
 	            }
 
-	            // Passando o ID do usuário para o método createComputador
-	            createComputador(scanner, loggedInUserId);
-	            createAcessorio(scanner, loggedInUserId);
 
 	        } else {
 	            System.out.println("Invalid login credentials.");
@@ -549,8 +546,9 @@ public class RestApi5ClientApplication {
 	 */
 	
 	private void donorMenu(Scanner scanner, Long loggedInUserId) {
-	    while (true) {
-
+	    //while (true) {
+		int option;
+		do {
 	        System.out.println("\n===== DONOR MENU =====");
 	        System.out.println("1. Add Equipment");
 	        System.out.println("2. Search Equipment");
@@ -559,9 +557,10 @@ public class RestApi5ClientApplication {
 	        System.out.println("5. View Donation Requests");
 	        System.out.println("6. Exit");
 
-	        int option = scanner.nextInt();
+	        option = scanner.nextInt();
 	        scanner.nextLine(); // Consumir a nova linha
 
+	        System.out.println(option);
 	        switch (option) {
 	            case 1:
 	                System.out.println("\nWhat type of equipment will be added? Choose one of the options below.\n"
@@ -654,12 +653,12 @@ public class RestApi5ClientApplication {
 
 	            case 6:
 	                System.out.println("Exiting Donor Menu...");
-	                return; // Sai do menu do doador
+	                break;
 
 	            default:
 	                System.out.println("Invalid option. Please try again.");
 	        }
-	    }
+	    }while (option != 6);
 	}
 	
 	private List<Doacao> getDonationRequestsByDonor(Long loggedInUserId) {
@@ -800,15 +799,18 @@ public class RestApi5ClientApplication {
 	 * default: System.out.println("Invalid option. Please try again."); } } }
 	 */
 	
-	private void recipientMenu(Scanner scanner, Long loggedInUserId) { while
-		  (true) { System.out.println("\n===== RECIPIENT MENU =====");
+	private void recipientMenu(Scanner scanner, Long loggedInUserId) 
+	{ 
+		int option;
+		do {
+		System.out.println("\n===== RECIPIENT MENU =====");
 		  System.out.println("1. View Available Equipments");
 		  System.out.println("2. Register donation");
 		  System.out.println("3. View all donations by ID");
 		  System.out.println("4. Finish/cancel donation");
-		  System.out.println("5. Logout and return to login menu");
+		  System.out.println("5. Exit");
 		  
-		  int option = scanner.nextInt(); scanner.nextLine(); // Consumir a nova linha
+		  option = scanner.nextInt(); scanner.nextLine(); // Consumir a nova linha
 		  
 		  switch (option) { 
 		  
@@ -840,10 +842,14 @@ public class RestApi5ClientApplication {
 		  Long idDoacao = scanner.nextLong(); scanner.nextLine();
 		  finishOrCancelDonation(scanner, idDoacao); break;
 		  
-		  case 5: System.out.println("Logging out and returning to login menu...");
-		  return;
+		  case 5:
+              System.out.println("Exiting Recipient Menu...");
+              break;
 		  
-		  default: System.out.println("Invalid option. Please try again."); } } }
+		  default: System.out.println("Invalid option. Please try again."); 
+		  } 
+		  } while (option != 5);
+		}
 	 
 	private void registrarPedidoDoacao(Scanner scanner, Long loggedInUserId) {
 	    System.out.print("Enter the ID of the equipment you want to request: ");
@@ -922,13 +928,15 @@ public class RestApi5ClientApplication {
 		RestApi5ClientApplication myApp = new RestApi5ClientApplication();
 		Scanner scanner = new Scanner(System.in);
 		
-		while (true) {
+		//while (true) {
+		int option;
+		do {
             System.out.println("\n===== MAIN MENU =====");
             System.out.println("1. Register");
             System.out.println("2. Login");
             System.out.println("3. Exit");
 
-            int option = scanner.nextInt();
+            option = scanner.nextInt();
             scanner.nextLine(); // Consumir a nova linha
 
             switch (option) {
@@ -941,13 +949,11 @@ public class RestApi5ClientApplication {
                     break;
                 case 3:
                     System.out.println("Exiting...");
-                    scanner.close();
-                    System.exit(0);
                     break;
                 default:
                     System.out.println("Invalid option. Try again.");
             }
-		}
+		}while (option != 3);
 	
 	}
 	
